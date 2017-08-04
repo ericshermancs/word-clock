@@ -9,103 +9,101 @@ $(function() {
         return this >= a && this <= b;
     };
     
-    function setTime() {
-        var hour = moment().format('h');
-        var minute = moment().minute();
-        var meridian = moment().format('a');
-        var firsthalf;
-        var secondhalf;
-        if (minute.isBetween(0, 32) || minute.isBetween(38, 42)) {
-            firsthalf = true;
-            secondhalf = false;
-        } else {
-            firsthalf = false;
-            secondhalf = true;
+    function setDate() {
+        var day = parseInt(moment().format('D'));
+        //alert(day);
+        if(day%10==3&&day!=13)
+        {
+            $('#third').addClass('light');
         }
-        
-        
-        if (minute.isBetween(0, 2) || minute.isBetween(58, 59)) {
-            $('#oclock').addClass('light');
-        } else if (minute.isBetween(3, 7) || minute.isBetween(23, 27) ||
-                   minute.isBetween(33, 37) || minute.isBetween(53, 57)) {
-            $('#five-minute').addClass('light');
-        } else if (minute.isBetween(8, 12) || minute.isBetween(48, 52)) {
-            $('#ten-minute').addClass('light');
-        } else if (minute.isBetween(13, 17) || minute.isBetween(43, 47)) {
-            $('#a, #quarter').addClass('light');
-        } else if (minute.isBetween(28, 32)) {
-            $('#half').addClass('light');
-        } else if (minute.isBetween(38, 42)) {
-            $('#forty').addClass('light');
+        else if(day%10==2&&day!=12)
+        {
+            $('#second').addClass('light');
         }
-        
-        if (minute.isBetween(18, 27) || minute.isBetween(33, 37)) {
-            $('#twenty').addClass('light');
+        else if(day%10==1&&day!=11)
+        {
+            $('#first').addClass('light');
         }
-        if (minute.isBetween(23, 27) || minute.isBetween(33, 37)) {
-            $('#dash').addClass('light');
+        else
+        {
+            $('#th').addClass('light');
         }
-        
-        
-        
-        if ((hour == 12 && secondhalf) || (hour == 1 && firsthalf)) {
-            $('#one').addClass('light');
-        }
-        if ((hour == 1 && secondhalf) || (hour == 2 && firsthalf)) {
-            $('#two').addClass('light');
-        }
-        if ((hour == 2 && secondhalf) || (hour == 3 && firsthalf)) {
-            $('#three').addClass('light');
-        }
-        if ((hour == 3 && secondhalf) || (hour == 4 && firsthalf)) {
-            $('#four').addClass('light');
-        }
-        if ((hour == 4 && secondhalf) || (hour == 5 && firsthalf)) {
-            $('#five').addClass('light');
-        }
-        if ((hour == 5 && secondhalf) || (hour == 6 && firsthalf)) {
-            $('#six').addClass('light');
-        }
-        if ((hour == 6 && secondhalf) || (hour == 7 && firsthalf)) {
-            $('#seven').addClass('light');
-        }
-        if ((hour == 7 && secondhalf) || (hour == 8 && firsthalf)) {
-            $('#eight').addClass('light');
-        }
-        if ((hour == 8 && secondhalf) || (hour == 9 && firsthalf)) {
-            $('#nine').addClass('light');
-        }
-        if ((hour == 9 && secondhalf) || (hour == 10 && firsthalf)) {
+        if(day==10)
+        {
             $('#ten').addClass('light');
         }
-        if ((hour == 10 && secondhalf) || (hour == 11 && firsthalf)) {
+        else if(day==11)
+        {
             $('#eleven').addClass('light');
         }
-        if ((hour == 11 && secondhalf) || (hour == 12 && firsthalf)) {
+        else if(day==12)
+        {
             $('#twelve').addClass('light');
         }
-        
-        if (meridian == "am") {
-            $('#am').addClass('light');
-        } else if (meridian == "pm") {
-            $('#pm').addClass('light');
+        else if(day==13)
+        {
+            $('#thir').addClass('light');
         }
-        
-        
-        
-        if (minute.isBetween(0, 2) || minute.isBetween(38, 42) || minute.isBetween(58,59)) {
-        } else if (firsthalf) {
-            $('#past').addClass('light');
-        } else if (secondhalf) {
-            $('#to').addClass('light');
+        if(day>=20&&day<=29)
+        {
+
+            $('#twent').addClass('light');
+            if (day!=20)
+            {
+                $('#twenty').addClass('light');
+            }
+            else
+            {
+                $('#ieth').addClass('light');
+            }
         }
-        
+        if (day==30)
+        {
+            $('#thirt').addClass('light');
+            $('#ieth').addClass('light');
+        }
+        else if(day==31)
+        {
+            $('#thirt').addClass('light');
+            $('#thirty').addClass('light');
+        }
+        if(day.isBetween(13,19))
+        {
+            $('#teen').addClass('light');
+        }
+        switch (day%10)
+        {
+            case 4: $('#four').addClass('light'); break;
+            case 5: $('#fif').addClass('light'); break;
+            case 6: $('#six').addClass('light'); break;
+            case 7: $('#seven').addClass('light'); break;
+            case 8: $('#eight').addClass('light'); break;
+            case 9: $('#nine').addClass('light'); break;
+        }
+        ///////////////////////////////////////////////////
+        var mon=parseInt(moment().format('M'));
+        //alert(mon);
+        switch(mon)
+        {
+            case 1: $('#jan').addClass('light'); break;
+            case 2: $('#feb').addClass('light'); break;
+            case 3: $('#mar').addClass('light'); break;
+            case 4: $('#apr').addClass('light'); break;
+            case 5: $('#may').addClass('light'); break;
+            case 6: $('#jun').addClass('light'); break;
+            case 7: $('#jul').addClass('light'); break;
+            case 8: $('#aug').addClass('light'); break;
+            case 9: $('#sep').addClass('light'); break;
+            case 10: $('#oct').addClass('light'); break;
+            case 11: $('#nov').addClass('light'); break;
+            case 12: $('#dec').addClass('light'); break;
+        }
     }
     
     
     function refresh() {
         $('.light').removeClass('light');
-        setTime();
+        setDate();
     }
     refresh();
     window.setInterval(refresh, 1000);
