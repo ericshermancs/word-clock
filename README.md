@@ -1,4 +1,4 @@
-# WordClock
-A simple Javascript word clock.
+# DateClock
+A simple Javascript word Calendar.
 
-See it live [here](https://michaelkolber.github.io/word-clock).
+See Michael Kolber's original word clock live [here](https://michaelkolber.github.io/word-clock).
